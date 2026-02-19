@@ -1,0 +1,6 @@
+*.csv
+*.parquet
+*.xlsx
+*.png
+__pycache__/
+*.swp

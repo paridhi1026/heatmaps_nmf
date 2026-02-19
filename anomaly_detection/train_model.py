@@ -17,7 +17,8 @@ from nmf2 import (
     build_feature_matrix,
     train_nmf_detector,
     nmf_score,
-    pick_threshold_by_labels
+    pick_threshold_by_labels,
+    fit_and_evaluate_nmf
 )
 
 
@@ -36,8 +37,19 @@ if __name__ == "__main__":
 
     print("Total shape:", df.shape)
     print(df["is_anomaly"].value_counts())
+    result = fit_and_evaluate_nmf(
+        df,
+        label_col='is_anomaly',
+        n_components_list=[5],
+        alpha_list=(0.0),
+        l1_ratio_list=(0.0),
+        threshold_method='f1'
+    )
 
-    
+    print("\n FINAL CONFIGURATION ")
+    print(result['config'])
+    exit()
+"""    
     # Separate good & anomaly
    
     df_good = df[df["is_anomaly"] == 0]
@@ -174,4 +186,4 @@ if __name__ == "__main__":
     meta_test.to_parquet("test_predictions.parquet", index=False)
 
     print("\nSaved test_predictions.parquet")
-
+"""
